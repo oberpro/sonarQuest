@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {AuthenticationService} from './authentication.service';
 import {PermissionService} from '../services/permission.service';
+import {RoutingUrls} from "../app-routing/routing-urls";
 
 @Injectable()
 export class AuthenticationGuard implements CanActivate {
@@ -18,7 +19,7 @@ export class AuthenticationGuard implements CanActivate {
   authenticate(nextUrl: string): boolean | Promise<boolean> {
     const isLoggedIn = this.authService.isLoggedIn();
     if (!isLoggedIn) {
-      this.router.navigate(['/'], {skipLocationChange: true});
+      this.router.navigate([RoutingUrls.login], {skipLocationChange: true});
       return false;
     }
 

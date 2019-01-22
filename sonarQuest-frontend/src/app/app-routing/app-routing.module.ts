@@ -10,10 +10,11 @@ import {GamemasterPageComponent} from '../pages/gamemaster-page/gamemaster-page.
 import {AuthenticationGuard} from '../login/authentication.guard';
 import {EmptyPageComponent} from '../pages/empty-page/empty-page.component';
 import {RoutingUrls} from './routing-urls';
+import {LoginPageComponent} from "../pages/login-page/login-page.component";
 
 
 const appRoutes: Routes = [
-  {path: '', redirectTo: '/empty', pathMatch: 'full'},
+  {path: '', redirectTo: RoutingUrls.myAvatar, pathMatch: 'full'},
   {path: RoutingUrls.empty, component: EmptyPageComponent},
   {path: RoutingUrls.start, component: StartPageComponent, canActivate: [AuthenticationGuard]},
   {path: RoutingUrls.myAvatar, component: MyAvatarPageComponent, canActivate: [AuthenticationGuard]},
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
   {path: RoutingUrls.marketplace, component: MarketplacePageComponent, canActivate: [AuthenticationGuard]},
   {path: RoutingUrls.gamemaster, component: GamemasterPageComponent, canActivate: [AuthenticationGuard]},
   {path: RoutingUrls.admin, component: AdminPageComponent, canActivate: [AuthenticationGuard]},
+  {path: RoutingUrls.login, component: LoginPageComponent}
 ];
 
 @NgModule({
