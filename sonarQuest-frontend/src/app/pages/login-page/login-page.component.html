@@ -1,0 +1,17 @@
+<div class="login-card">
+  <div class="title">{{"LOGIN.TITLE" | translate}}</div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <div class="login-failed" *ngIf="error"><mat-icon>close</mat-icon>{{"LOGIN.FAILED" | translate}}</div>
+    <mat-form-field>
+      <input matInput placeholder="Username" formControlName="username">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [type]="'password'" placeholder="Password" formControlName="password">
+    </mat-form-field>
+    <div class="buttons">
+      <button mat-button mat-raised-button color="primary" [disabled]="form.invalid || loading" type="submit">
+        Go!
+      </button>
+    </div>
+  </form>
+</div>

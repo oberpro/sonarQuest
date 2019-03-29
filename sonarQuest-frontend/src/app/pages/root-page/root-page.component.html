@@ -1,0 +1,33 @@
+<mat-sidenav-container *ngIf="user">
+  <mat-sidenav #sidenav mode="over">
+    <div class="sidenav-header">
+      <div>Menu</div>
+      <button mat-button (click)="sidenav.toggle()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="sidenav-user">
+      <div class="profile-image"></div>
+      <div class="profile-name">{{user.username}}</div>
+    </div>
+    <div class=sidenav-content>
+      <div class="sidenav-entry" (click)="navigateToNavEntry(item)" *ngFor="let item of allowedEntries">
+        <div class="icon">
+          <mat-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
+        </div>
+        <span>{{item.title}}</span>
+      </div>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="header">
+      <button mat-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <!-- <div>
+        <router-outlet></router-outlet>
+      </div> -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

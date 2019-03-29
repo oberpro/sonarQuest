@@ -53,7 +53,7 @@ import {ParticipatedQuestsComponent} from './pages/quest-page/components/partici
 import {AvailableQuestsComponent} from './pages/quest-page/components/available-quests/available-quests.component';
 import {ViewAvailableQuestComponent} from './pages/quest-page/components/available-quests/components/view-available-quest/view-available-quest.component';
 import {ParticipationService} from './services/participation.service';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateModule, TranslateLoader, TranslateService} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AdminDeveloperComponent} from './pages/admin-page/components/admin-developer/admin-developer.component';
@@ -69,7 +69,6 @@ import {GamemasterIconSelectComponent} from './pages/gamemaster-page/components/
 import {AdminSonarCubeComponent} from './pages/admin-page/components/admin-sonar-cube/admin-sonar-cube.component';
 import {SonarCubeService} from './services/sonar-cube.service';
 import {SelectBackgroundComponent} from './pages/admin-page/components/admin-world/components/edit-world/select-background/select-background.component';
-import {LoginComponent} from './login/login.component';
 import {AuthenticationService} from './login/authentication.service';
 import {LocalStorageService} from './login/local-storage.service';
 import {AuthenticationGuard} from './login/authentication.guard';
@@ -86,6 +85,8 @@ import {UserToWorldService} from './services/user-to-world.service';
 import {PermissionService} from './services/permission.service';
 import { WizardService } from './services/wizard.service';
 import { ArtefactViewDetailsComponent } from './pages/marketplace-page/components/marketplace-artefact-view/marketplace-artefact-view.component';
+import { RootPageComponent } from './pages/root-page/root-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -137,9 +138,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     GamemasterIconSelectComponent,
     AdminSonarCubeComponent,
     SelectBackgroundComponent,
-    LoginComponent,
     EmptyPageComponent,
     LoadingComponent,
+    RootPageComponent,
+    LoginPageComponent,
   ],
   entryComponents: [
     EditWorldComponent,
@@ -165,7 +167,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ArtefactViewDetailsComponent,
     GamemasterIconSelectComponent,
     SelectBackgroundComponent,
-    LoginComponent,
     EmptyPageComponent,
     LoadingComponent
   ],

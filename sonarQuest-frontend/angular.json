@@ -24,8 +24,7 @@
               "src/styles.scss",
               "src/styles.css",
               "src/theme.scss",
-              "node_modules/rpg-awesome/css/rpg-awesome.css",
-              "node_modules/@covalent/core/common/platform.scss"
+              "node_modules/rpg-awesome/css/rpg-awesome.css"
             ],
             "scripts": []
           },
@@ -78,8 +77,7 @@
               "src/styles.scss",
               "src/styles.css",
               "src/theme.scss",
-              "node_modules/rpg-awesome/css/rpg-awesome.css",
-              "node_modules/@covalent/core/common/platform.scss"
+              "node_modules/rpg-awesome/css/rpg-awesome.css"
             ],
             "assets": [
               "src/assets",
@@ -127,7 +125,7 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "styleext": "css"
+      "styleext": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "app"
