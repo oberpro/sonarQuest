@@ -21,8 +21,8 @@ mat-sidenav-container {
 }
 
 mat-sidenav {
-
-  min-width: 380px;
+  width:100%;
+  max-width: 380px;
   background-color: #c62828;
   color: white;
 
@@ -73,7 +73,13 @@ mat-sidenav {
   .sidenav-user {
     padding: 10px;
 
-    .profile-image {}
+    .profile-image {
+      width: 100%;
+      min-height: 150px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+    }
 
     .profile-name {
       text-align: center;

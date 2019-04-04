@@ -3,6 +3,8 @@ import { User } from 'app/Interfaces/User';
 import { Router } from '@angular/router';
 import { PermissionService } from 'app/services/permission.service';
 import { UserService } from 'app/services/user.service';
+import { ImageService } from 'app/services/image.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root-page',
@@ -11,6 +13,7 @@ import { UserService } from 'app/services/user.service';
 })
 export class RootPageComponent implements OnInit {
   user: User = null;
+  profileImage = null;
   allowedEntries = [];
   navigationEntries = [{
     icon: 'home',
@@ -62,13 +65,20 @@ export class RootPageComponent implements OnInit {
   constructor(
     public router: Router,
     private permissionService: PermissionService,
-    private userService: UserService) {
+    private userService: UserService,
+    private imageService:ImageService,
+    private sanitizer: DomSanitizer) {
 
   }
 
   ngOnInit() {
     this.userService.getUser().then(user => {
       this.user = user;
+      this.userService.getImage().subscribe(o=>{
+       this.imageService.createImageFromBlob(o).subscribe(i=>{
+        this.profileImage = this.sanitizer.bypassSecurityTrustStyle(`url('${i}')`);
+        });
+      })
     }).catch(_error => { });
     this.permissionService.getPermissions().then(permission=>{
       this.allowedEntries = this.navigationEntries.filter(item=>permission.includes(item.permission));

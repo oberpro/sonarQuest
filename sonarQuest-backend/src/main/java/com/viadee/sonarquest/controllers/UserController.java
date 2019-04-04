@@ -13,8 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -70,16 +72,18 @@ public class UserController {
     }
 
     @GetMapping(path = "/avatar")
-    public @ResponseBody byte[] avatar(final Principal principal, final HttpServletResponse response) {
+    public @ResponseBody
+    byte[] avatar(final Principal principal, final HttpServletResponse response) {
         response.addHeader(HEADER_AVATAR_NAME, HEADER_AVATAR_VALUE);
         final User user = getUser(principal);
         return user != null ? loadAvatar(avatarDirectoryPath, user.getPicture()) : null;
     }
 
     @GetMapping(path = "/{id}/avatar")
-    public @ResponseBody byte[] avatarForUser(final Principal principal,
-            @PathVariable(value = "id") final Long id,
-            final HttpServletResponse response){
+    public @ResponseBody
+    byte[] avatarForUser(final Principal principal,
+                         @PathVariable(value = "id") final Long id,
+                         final HttpServletResponse response) {
         response.addHeader(HEADER_AVATAR_NAME, HEADER_AVATAR_VALUE);
         final User user = userService.findById(id);
         return loadAvatar(avatarDirectoryPath, user.getPicture());

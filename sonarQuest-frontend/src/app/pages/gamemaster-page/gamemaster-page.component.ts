@@ -9,11 +9,10 @@ import { PermissionService } from 'app/services/permission.service';
 })
 export class GamemasterPageComponent implements OnInit {
 
-  public isMarketplaceVisible: boolean;
+  public isMarketplaceVisible: boolean = false;
   selectedTab: number;
 
   constructor(private permissionService: PermissionService) {
-    this.isMarketplaceVisible = this.permissionService.isUrlVisible(RoutingUrls.marketplace);
   }
 
   ngOnInit() {

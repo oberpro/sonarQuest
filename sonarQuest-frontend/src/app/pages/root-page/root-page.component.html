@@ -7,7 +7,8 @@
       </button>
     </div>
     <div class="sidenav-user">
-      <div class="profile-image"></div>
+      <div class="profile-image" *ngIf="profileImage" [style.background-image]="profileImage">
+      </div>
       <div class="profile-name">{{user.username}}</div>
     </div>
     <div class=sidenav-content>

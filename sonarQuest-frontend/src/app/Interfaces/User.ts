@@ -10,7 +10,7 @@ export interface User {
   username: string,
   mail?: string,
   role: Role,
-  picture?: string,
+  pictureUrl?: string,
   aboutMe?: string,
   avatarClass?: AvatarClass,
   avatarRace?: AvatarRace,

@@ -53,8 +53,10 @@ export class MarketplacePageComponent implements OnInit {
     private _dataTableService: TdDataTableService
   ) {
   }
-
+  
+  user: User;
   ngOnInit() {
+     this.userService.getUser().then(_user=>this.user = _user).catch(err=>{});
     this.translateService.get('ARTEFACT').subscribe((col_names) => {
       this.columns = [
         {name: 'icon', label: ''},
@@ -70,19 +72,18 @@ export class MarketplacePageComponent implements OnInit {
     });
     this.artefactService.getData();
 
-    const user: User = this.userService.getUser();
-    const userArtefacts: Artefact[] = user.artefacts;
+    const userArtefacts: Artefact[] = this.user.artefacts;
     userArtefacts.map(artefact => this.my_artefacts_id.push(artefact.id));
-    if (user.level) {
-      this.level = user.level.levelNumber;
-    } else {
-      this.level = 1;
-    }
-    if (user.gold) {
-      this.gold = user.gold;
-    } else {
-      this.gold = 0;
-    }
+    // if (user.level) {
+    //   this.level = user.level.levelNumber;
+    // } else {
+    //   this.level = 1;
+    // }
+    // if (user.gold) {
+    //   this.gold = user.gold;
+    // } else {
+    //   this.gold = 0;
+    // }
   }
 
   buyArtefact(artefact: Artefact) {
