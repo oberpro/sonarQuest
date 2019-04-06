@@ -21,7 +21,7 @@ mat-sidenav-container {
 }
 
 mat-sidenav {
-  width:100%;
+  width: 100%;
   max-width: 380px;
   background-color: #c62828;
   color: white;
@@ -73,13 +73,7 @@ mat-sidenav {
   .sidenav-user {
     padding: 10px;
 
-    .profile-image {
-      width: 100%;
-      min-height: 150px;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-    }
+    .profile-image {}
 
     .profile-name {
       text-align: center;
@@ -87,4 +81,61 @@ mat-sidenav {
       font-size: 1.2em,
     }
   }
+}
+
+
+.profile-details {
+  display: flex;
+
+  .profile-xp {
+    width: 50%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: black;
+    font-size: 1.3em;
+    font-family: sans-serif;
+    justify-content: flex-end;
+    border-radius: 7px;
+    padding: 2px;
+    margin: 2px;
+    background-color: rgba(255, 255, 255, 0.5411764705882353);
+  }
+
+  .profile-gold {
+    width: 50%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: black;
+    font-size: 1.3em;
+    font-family: sans-serif;
+    justify-content: flex-end;
+    border-radius: 7px;
+    padding: 2px;
+    margin: 2px;
+    background-color: rgba(255, 255, 255, 0.5411764705882353);
+  }
+}
+
+.gold-logo {
+  width: 25px;
+  height: 25px;
+  background-image: url('assets/images/gold-black.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-left: 5px;
+}
+
+.xp-logo {
+  width: 25px;
+  height: 25px;
+  background-image: url('assets/images/xp-logo.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-left: 5px;
 }

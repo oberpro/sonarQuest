@@ -78,3 +78,5 @@ INSERT INTO User_Artefact (user_id, artefact_id) VALUES
   (1, 4),
   (2, 4),
   (3, 1);
+
+INSERT INTO Level (id,sqlevel,min_xp,max_xp) VALUES (1,1,0,100),(2,2,101,200),;

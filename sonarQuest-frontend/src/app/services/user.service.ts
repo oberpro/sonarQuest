@@ -16,21 +16,28 @@ export class UserService {
     private authenticationService: AuthenticationService) {
   }
 
-  getUser():Promise<User>{
-    return new Promise((resolve,reject)=>{
-      if(this.authenticationService.isLoggedIn()){
-        if(this.user){
+  loadUser(): Promise<User> {
+    const url = `${environment.endpoint}/user`;
+    return new Promise((resolve, reject) => {
+      this.httpClient.get<User>(url).toPromise().then(user => {
+        this.user = user;
+        resolve(user);
+      }).catch(_error => {
+        this.authenticationService.logout();
+        reject(_error);
+      });
+    });
+  }
+
+  getUser(): Promise<User> {
+    return new Promise((resolve, reject) => {
+      if (this.authenticationService.isLoggedIn()) {
+        if (this.user) {
           resolve(this.user);
-        }else{
-          const url = `${environment.endpoint}/user`;
-          this.httpClient.get<User>(url).toPromise().then(user=>{
-            resolve(user);
-          }).catch(_error=>{
-            this.authenticationService.logout();
-            reject(_error);
-          });
+        } else {
+          this.loadUser().then(user => resolve(user)).catch(error => reject(error));
         }
-      }else{
+      } else {
         reject("Not logged in");
         this.authenticationService.logout();
       }
@@ -46,9 +53,9 @@ export class UserService {
     }));
   }
 
-  public getImage(): Observable<Blob> {
+  public getImage(): Observable<any> {
     const url = `${environment.endpoint}/user/avatar`;
-    return this.httpClient.get(url, { responseType: 'blob' });
+    return this.httpClient.get(url, { responseType: 'text' });
   }
 
   public getImageForUser(user: User): Observable<Blob> {

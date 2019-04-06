@@ -1,10 +1,10 @@
-import {Observable, Subscriber} from 'rxjs';
-import {Injectable} from '@angular/core';
-import {World} from '../Interfaces/World';
-import {environment} from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
-import {UserService} from './user.service';
-import {User} from '../Interfaces/User';
+import { Observable, Subscriber } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { World } from '../Interfaces/World';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { UserService } from './user.service';
+import { User } from '../Interfaces/User';
 
 @Injectable()
 export class WorldService {
@@ -13,10 +13,8 @@ export class WorldService {
   wordChangeListener: Subscriber<boolean>[] = [];
 
   constructor(private http: HttpClient, private userService: UserService) {
-    userService.onUserChange().subscribe(() => {
-      if (userService.getUser()) {
-        this.loadWorld();
-      }
+    userService.getUser().then(user => {
+      this.loadWorld();
     });
   }
 

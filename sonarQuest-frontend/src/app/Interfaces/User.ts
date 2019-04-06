@@ -1,16 +1,16 @@
-import {Role} from './Role';
-import {Level} from './Level';
-import {Artefact} from './Artefact';
-import {AvatarClass} from './AvatarClass';
-import {AvatarRace} from './AvatarRace';
-import {World} from './World';
+import { Role } from './Role';
+import { Level } from './Level';
+import { Artefact } from './Artefact';
+import { AvatarClass } from './AvatarClass';
+import { AvatarRace } from './AvatarRace';
+import { World } from './World';
 
 export interface User {
   id?: number,
   username: string,
   mail?: string,
   role: Role,
-  pictureUrl?: string,
+  picture?: string,
   aboutMe?: string,
   avatarClass?: AvatarClass,
   avatarRace?: AvatarRace,

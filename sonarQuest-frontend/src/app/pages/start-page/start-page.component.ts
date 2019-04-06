@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../services/user.service';
-import {User} from '../../Interfaces/User';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
+import { User } from '../../Interfaces/User';
 
 @Component({
   selector: 'app-start-page',
@@ -16,8 +16,10 @@ export class StartPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = this.userService.getUser();
-    this.xpPercent();
+    this.userService.getUser().then(user => {
+      this.user = user;
+      this.xpPercent();
+    });
   }
 
   public xpPercent(): void {

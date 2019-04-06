@@ -1,15 +1,15 @@
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {AdminDeveloperComponent} from './../../admin-developer.component';
-import {Component, OnInit, Inject} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {User} from '../../../../../../Interfaces/User';
-import {UserService} from '../../../../../../services/user.service';
-import {AvatarClass} from '../../../../../../Interfaces/AvatarClass';
-import {AvatarRace} from '../../../../../../Interfaces/AvatarRace';
-import {AvatarClassService} from '../../../../../../services/avatar-class.service';
-import {AvatarRaceService} from '../../../../../../services/avatar-race.service';
-import {Role} from '../../../../../../Interfaces/Role';
-import {RoleService} from '../../../../../../services/role.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { AdminDeveloperComponent } from './../../admin-developer.component';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from '../../../../../../Interfaces/User';
+import { UserService } from '../../../../../../services/user.service';
+import { AvatarClass } from '../../../../../../Interfaces/AvatarClass';
+import { AvatarRace } from '../../../../../../Interfaces/AvatarRace';
+import { AvatarClassService } from '../../../../../../services/avatar-class.service';
+import { AvatarRaceService } from '../../../../../../services/avatar-race.service';
+import { Role } from '../../../../../../Interfaces/Role';
+import { RoleService } from '../../../../../../services/role.service';
 
 @Component({
   selector: 'app-admin-developer-create',
@@ -65,7 +65,7 @@ export class AdminDeveloperCreateComponent implements OnInit {
         this.nameTaken = false;
       }
       console.log(this.nameTaken);
-      return this.nameTaken ? {'currentName': {nameVal}} : null;
+      return this.nameTaken ? { 'currentName': { nameVal } } : null;
     }
   }
   matchMailValidator() {
@@ -77,21 +77,22 @@ export class AdminDeveloperCreateComponent implements OnInit {
         this.mailTaken = false;
       }
       console.log(this.mailTaken);
-      return this.mailTaken ? {'currentMail': {mailVal: mailVal}} : null;
+      return this.mailTaken ? { 'currentMail': { mailVal: mailVal } } : null;
     }
   }
 
   createDeveloper() {
-    if (!this.nameTaken && !this.mailTaken &&  this.createForm.valid) {
+    if (!this.nameTaken && !this.mailTaken && this.createForm.valid) {
       const new_developer: User = {
         username: this.createForm.get('name').value,
         mail: this.createForm.get('mail').value,
         aboutMe: this.createForm.get('about').value,
         picture: this.createForm.get('picture').value,
         role: this.createForm.get('role').value,
-        avatarClass:  this.createForm.get('class').value,
+        avatarClass: this.createForm.get('class').value,
         avatarRace: this.createForm.get('race').value,
-        password: this.createForm.get('password').value
+        password: this.createForm.get('password').value,
+
       };
       this.userService.updateUser(new_developer)
         .then(developer => {
@@ -109,11 +110,11 @@ export class AdminDeveloperCreateComponent implements OnInit {
       return 'This value is mandatory';
     }
     if (this.nameTaken) {
-      this.createForm.controls['name'].setErrors({'matchNameValidator': true});
+      this.createForm.controls['name'].setErrors({ 'matchNameValidator': true });
       return 'Name already taken. Please choose a different name';
     }
-    if (this.mailTaken && this.createForm.get('mail').value != null ) {
-      this.createForm.controls['mail'].setErrors({'matchMailValidator': true});
+    if (this.mailTaken && this.createForm.get('mail').value != null) {
+      this.createForm.controls['mail'].setErrors({ 'matchMailValidator': true });
       return 'E-Mail already taken. Please choose a different E-Mail';
     }
   }

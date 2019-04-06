@@ -3,10 +3,12 @@ package com.viadee.sonarquest.controllers;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.Principal;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import io.swagger.annotations.ResponseHeader;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -72,21 +75,19 @@ public class UserController {
     }
 
     @GetMapping(path = "/avatar")
-    public @ResponseBody
-    byte[] avatar(final Principal principal, final HttpServletResponse response) {
+    public ResponseEntity<String> avatar(final Principal principal, final HttpServletResponse response) {
         response.addHeader(HEADER_AVATAR_NAME, HEADER_AVATAR_VALUE);
         final User user = getUser(principal);
-        return user != null ? loadAvatar(avatarDirectoryPath, user.getPicture()) : null;
+        return user != null ? ResponseEntity.status(200).body(Base64.getEncoder().encodeToString(loadAvatar(avatarDirectoryPath, user.getPicture()))) : ResponseEntity.status(500).build();
     }
 
     @GetMapping(path = "/{id}/avatar")
-    public @ResponseBody
-    byte[] avatarForUser(final Principal principal,
+    public ResponseEntity<String> avatarForUser(final Principal principal,
                          @PathVariable(value = "id") final Long id,
                          final HttpServletResponse response) {
         response.addHeader(HEADER_AVATAR_NAME, HEADER_AVATAR_VALUE);
         final User user = userService.findById(id);
-        return loadAvatar(avatarDirectoryPath, user.getPicture());
+        return ResponseEntity.status(200).body(Base64.getEncoder().encodeToString(loadAvatar(avatarDirectoryPath, user.getPicture())));
     }
 
     public byte[] loadAvatar(String avaDir, final String avatarPic) {

@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.viadee.sonarquest.entities.User;
@@ -33,7 +34,7 @@ public class UserControllerTest {
         when(principal.getName()).thenReturn("Aria");
         when(userService.findByUsername("Aria")).thenReturn(null);
         HttpServletResponse response = mock(HttpServletResponse.class);
-        byte[] avatar = userController.avatar(principal, response);
+        ResponseEntity<String> avatar = userController.avatar(principal, response);
         assertNull(avatar);
     }
 
@@ -47,7 +48,7 @@ public class UserControllerTest {
         ReflectionTestUtils.setField(userController, "avatarDirectoryPath",
                 "avatar");
         HttpServletResponse response = mock(HttpServletResponse.class);
-        byte[] avatar = userController.avatar(principal, response);
+        ResponseEntity<String> avatar = userController.avatar(principal, response);
         assertNull(avatar);
     }
 

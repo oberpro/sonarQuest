@@ -87,6 +87,7 @@ import { WizardService } from './services/wizard.service';
 import { ArtefactViewDetailsComponent } from './pages/marketplace-page/components/marketplace-artefact-view/marketplace-artefact-view.component';
 import { RootPageComponent } from './pages/root-page/root-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { ProfileImageComponent } from './pages/root-page/components/profile-image/profile-image.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -142,6 +143,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoadingComponent,
     RootPageComponent,
     LoginPageComponent,
+    ProfileImageComponent,
   ],
   entryComponents: [
     EditWorldComponent,

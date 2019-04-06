@@ -1,15 +1,15 @@
-import {Participation} from './../../../../../../Interfaces/Participation';
-import {QuestService} from './../../../../../../services/quest.service';
-import {TaskService} from './../../../../../../services/task.service';
-import {MAT_DIALOG_DATA} from '@angular/material';
-import {Component, OnInit, Inject} from '@angular/core';
-import {Quest} from '../../../../../../Interfaces/Quest';
-import {World} from '../../../../../../Interfaces/World';
-import {WorldService} from '../../../../../../services/world.service';
-import {SonarCubeService} from '../../../../../../services/sonar-cube.service';
-import {User} from '../../../../../../Interfaces/User';
-import {UserService} from '../../../../../../services/user.service';
-import {Task} from '../../../../../../Interfaces/Task';
+import { Participation } from './../../../../../../Interfaces/Participation';
+import { QuestService } from './../../../../../../services/quest.service';
+import { TaskService } from './../../../../../../services/task.service';
+import { MAT_DIALOG_DATA } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Quest } from '../../../../../../Interfaces/Quest';
+import { World } from '../../../../../../Interfaces/World';
+import { WorldService } from '../../../../../../services/world.service';
+import { SonarCubeService } from '../../../../../../services/sonar-cube.service';
+import { User } from '../../../../../../Interfaces/User';
+import { UserService } from '../../../../../../services/user.service';
+import { Task } from '../../../../../../Interfaces/Task';
 
 @Component({
   selector: 'app-view-participated-quest',
@@ -20,6 +20,7 @@ export class ViewParticipatedQuestComponent implements OnInit {
 
   currentWorld: World;
   tasks: Task[];
+  user: User;
 
   constructor(
     private sonarCubeService: SonarCubeService,
@@ -34,29 +35,30 @@ export class ViewParticipatedQuestComponent implements OnInit {
   ngOnInit() {
     this.tasks = this.quest.tasks;
     this.currentWorld = this.worldService.getCurrentWorld();
+    this.userService.getUser().then(user => this.user = user).catch(err => { });
   }
 
   addParticipation(task: Task) {
     //if (task.status != 'SOLVED') {
-      return this.taskService.addParticipation(task, this.quest)
-        .then(() => {
-          return this.questService.getQuest(this.quest.id);
-        }).then((updatedQuest: Quest) => {
-          this.quest = updatedQuest;
-          this.tasks = updatedQuest.tasks
-        })
+    return this.taskService.addParticipation(task, this.quest)
+      .then(() => {
+        return this.questService.getQuest(this.quest.id);
+      }).then((updatedQuest: Quest) => {
+        this.quest = updatedQuest;
+        this.tasks = updatedQuest.tasks
+      })
     //}
   }
 
   removeParticipation(task: Task) {
     //if (task.status != 'SOLVED') {
-      return this.taskService.removeParticipation(task)
-        .then(() => {
-          return this.questService.getQuest(this.quest.id)
-        }).then((updatedQuest: Quest) => {
-          this.quest = updatedQuest;
-          this.tasks = updatedQuest.tasks
-        })
+    return this.taskService.removeParticipation(task)
+      .then(() => {
+        return this.questService.getQuest(this.quest.id)
+      }).then((updatedQuest: Quest) => {
+        this.quest = updatedQuest;
+        this.tasks = updatedQuest.tasks
+      })
     //}
   }
 
@@ -77,7 +79,7 @@ export class ViewParticipatedQuestComponent implements OnInit {
     const participations: Participation[] = this.quest.participations;
     participations.forEach((participation) => {
       if (participation.tasks.map(partTask => partTask.id).includes(task.id)) {
-        if (this.userService.getUser().id === participation.user.id) {
+        if (this.user.id === participation.user.id) {
           result = true;
         }
       }

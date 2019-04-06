@@ -1,10 +1,10 @@
-import {ImageService} from './../../../../services/image.service';
-import {MAT_DIALOG_DATA} from '@angular/material';
-import {MatDialogRef} from '@angular/material';
-import {Component, OnInit, Inject} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
-import {UserService} from '../../../../services/user.service';
-import {User} from '../../../../Interfaces/User';
+import { ImageService } from './../../../../services/image.service';
+import { MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { UserService } from '../../../../services/user.service';
+import { User } from '../../../../Interfaces/User';
 
 @Component({
   selector: 'app-my-avatar-edit',
@@ -21,7 +21,7 @@ export class AvatarEditComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private imageService: ImageService,
     @Inject(MAT_DIALOG_DATA) public user: User) {
-    this.user = {...this.user};
+    this.user = { ...this.user };
   }
 
   ngOnInit() {
